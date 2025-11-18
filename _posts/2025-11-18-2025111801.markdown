@@ -1,0 +1,23 @@
+---
+layout: post
+title: Spring Security原理及实现
+date: 2025-11-18 18:14:03 +0800
+description:
+img:  # Add image post (optional)
+tags: [] # add tag
+---
+
+## Spring Security原理
+
+### 一句话概括
+Spring Security 的核心原理是通过一条 **SecurityFilterChain** 拦截所有请求，在认证阶段由**AuthenticationManager** 协同 **AuthenticationProvider**、**UserDetailsService**和**PasswordEncoder**完成用户身份验证，并将认证结果 **Authentication** 保存到**SecuritvContext**;**在授权阶段，通过FilterSecurityInterceptor**/方法级安全等组件，根据当前 **Authentication**中的 **GrantedAuthority**列表，结合配置的 URL 规则或注解(如 **@PreAuthorize**)，决定是否允许访问。
+
+### 详解
+1. **SecurityFilterChain**
+   - **SecurityFilterChain** 是 Spring Security 的核心接口，它定义了 Spring Security 过滤链的配置。
+   - **SecurityFilterChain** 由多个 **Filter** 组成，这些 **Filter** 用于处理用户请求，并完成认证、授权、会话管理、异常处理等任务。
+   - **SecurityFilterChain** 通过 **FilterChainProxy** 拦截所有请求，并调用相应的 **Filter** 处理请求。
+   - **SecurityFilterChain** 通过 **HttpSecurity** 配置过滤链，
+2. **AuthenticationManager** 
+   - **AuthenticationManager** 是 Spring Security 的核心接口，它定义了认证管理器的配置。
+3. **AuthenticationProvider**
